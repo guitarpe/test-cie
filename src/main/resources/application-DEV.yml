@@ -1,0 +1,65 @@
+#servidor
+server:
+  host: localhost
+  port: 8089
+  tomcat:
+    max-swallow-size: 800000000
+    max-http-form-post-size: 80MB
+
+aplicacao:
+  versao: 1.6
+
+#Spring
+spring:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        ddl-auto: update
+    show-sql: false
+    open-in-view: false
+  datasource-ciedb:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://34.151.216.181:5432/postgres
+    username: postgres
+    password: Pez@261813
+  servlet:
+    multipart:
+      max-file-size: 80MB
+      max-request-size: 100MB
+      enabled: true
+
+#LOGGING
+logging:
+  level:
+    root: INFO
+    com.sample.feign.demofeigncustomconfig: INFO
+    br.edu.unicesumar: INFO
+    org.springframework.web.client: INFO
+    org.springframework.security.oauth2: INFO
+
+quartz:
+  job-store-type: memory
+  properties:
+    org:
+      quartz:
+        jobStore:
+          isClustered: false
+        threadPool:
+          threadCount: 10
+
+  #autenticação OAuth2
+security:
+  oauth2:
+    client:
+      scope: password
+      client-id: 607c6765-d6c9-4c20-a4ff-c373a3d50794
+      client-secret: 5eabc608-8003-4105-8ed1-5cc45c7c5eb8
+
+api-climatempo:
+  token: 4895f3c2ba7a772438c0ace9081d29c3
+  endpoint: http://apiadvisor.climatempo.com.br/api/v1/climate/rain/
+
+api-viacep:
+  endpoint: https://viacep.com.br/ws/
