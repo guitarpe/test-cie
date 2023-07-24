@@ -40,4 +40,28 @@ public class DataController {
                 .timestamp(LocalDateTime.now())
                 .message(Messages.MSG_INI_SUCCESS.value()).build());
     }
+
+    @PostMapping(value="/users",
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<JobDetails> getUsers(@Valid @RequestBody JobRequest request) throws Exception {
+
+        return ResponseEntity.ok().body(JobDetails.builder()
+                .code(200)
+                .sucesso(true)
+                .timestamp(LocalDateTime.now())
+                .message(Messages.MSG_INI_SUCCESS.value()).build());
+    }
+
+    @PostMapping(value="/user/save",
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<JobDetails> saveUser(@Valid @RequestBody JobRequest request) throws Exception {
+
+        return ResponseEntity.ok().body(JobDetails.builder()
+                .code(200)
+                .sucesso(true)
+                .timestamp(LocalDateTime.now())
+                .message(Messages.MSG_INI_SUCCESS.value()).build());
+    }
 }

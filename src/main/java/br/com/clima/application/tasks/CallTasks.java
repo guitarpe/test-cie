@@ -18,13 +18,10 @@ import java.util.Objects;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class CallTasks {
 
-    private final JobExecute jobExecute;
     private final ClimaTempoRainCallService ctRainCallService;
     private final ClimaTempoTempCallService ctTempCallService;
 
     public void startTaskOption(JobRequest request) throws Exception {
-
-        jobExecute.start(request);
 
         if(Objects.isNull(Integrations.fromValue(request.getIntegracao()))){
             throw new Exception(Messages.MSG_NOT_FOUND.value());
@@ -49,8 +46,6 @@ public class CallTasks {
     }
 
     public void stopTaskOption(JobRequest request) throws Exception {
-
-        jobExecute.stop(request);
 
         if(Objects.isNull(Integrations.fromValue(request.getIntegracao()))){
             throw new Exception(Messages.MSG_NOT_FOUND.value());

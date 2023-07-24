@@ -25,14 +25,8 @@ public class Users implements Serializable {
 	@Column(name = "LOGIN", nullable=false)
 	private String username;
 	
-	@Column(name = "EMAIL", nullable=false)
-	private String email;
-	
 	@Column(name = "PASSWORD", nullable=false)
 	private String password;
-	
-	@Column(name = "SYSTEM", nullable=false)
-	private String sistema;
 	
 	@Column(name = "STATUS", nullable=false)
 	private String status;
@@ -43,7 +37,6 @@ public class Users implements Serializable {
 
 	public Users(long id, String sistema) {
 		this.id = id;
-		this.sistema = sistema;
 	}
 
 	@Override

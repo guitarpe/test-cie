@@ -18,24 +18,27 @@ public class ClimateCities {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "CD_ALUNO", nullable=false)
-    private String aluno;
+    @Column(name = "NAME", nullable=false)
+    private String name;
 
-    @Column(name = "CD_GUID", nullable=false)
-    private String guid;
+    @Column(name = "STATE", nullable=false)
+    private String state;
 
-    @Column(name = "DS_SERVICO", nullable=false)
-    private String servico;
+    @Column(name = "COUNTRY", nullable=false)
+    private String contry;
 
-    @Column(name = "DS_ACAO", nullable=false)
-    private String acao;
+    @Column(name = "DATE", nullable=false)
+    private String date;
 
-    @Column(name = "DT_DIA", nullable=false)
-    private String dia;
+    @Column(name = "TEMPERATURE", nullable=false)
+    private String temperature;
 
-    @Column(name = "NUM_HORA", nullable=false)
-    private Integer hora;
+    @Column(name = "WIND_SPEED", nullable=false)
+    private Integer windSpeed;
 
     @Column(name = "DH_INSERT", nullable=false)
-    private LocalDateTime dtInsert;
+    private LocalDateTime hdInsert;
+
+    @Column(name = "DH_UPDATE", nullable=false)
+    private LocalDateTime dhUpdate;
 }

@@ -13,7 +13,7 @@ import java.util.Set;
 
 @Getter
 @Setter
-public class UserDTO implements UserDetails {
+public class User implements UserDetails {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -21,7 +21,7 @@ public class UserDTO implements UserDetails {
 	
 	private final Users user;
 
-	public UserDTO(Users user) {
+	public User(Users user) {
 		this.user = user;
     }
 	
