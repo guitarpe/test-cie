@@ -1,11 +1,9 @@
 package br.com.clima.application.tasks;
 
 import br.com.clima.application.dto.JobRequest;
-import br.com.clima.application.enuns.Integrations;
 import br.com.clima.application.enuns.Messages;
-import br.com.clima.application.service.ClimaTempoRainCallService;
 
-import br.com.clima.application.service.ClimaTempoTempCallService;
+import br.com.clima.application.service.OpenWeatherCallService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,55 +16,43 @@ import java.util.Objects;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class CallTasks {
 
-    private final ClimaTempoRainCallService ctRainCallService;
-    private final ClimaTempoTempCallService ctTempCallService;
+    private final OpenWeatherCallService service;
 
     public void startTaskOption(JobRequest request) throws Exception {
 
-        if(Objects.isNull(Integrations.fromValue(request.getIntegracao()))){
-            throw new Exception(Messages.MSG_NOT_FOUND.value());
-        }
-
         if(Objects.isNull(request.getCidade())){
-            throw new Exception(Messages.MSG_CITY_NOT_FOUND.value());
+            throw new Exception(Messages.MSG_CIDADE_NOT_FOUND.value());
         }
 
-        switch (Objects.requireNonNull(Integrations.fromValue(request.getIntegracao()))) {
-            case INT_RAIN:
-                ctRainCallService.start(request.getIntervalo());
-                break;
-            case INT_TEMPERATURE:
-                ctTempCallService.start(request.getIntervalo());
-                break;
-            default:
-                break;
+        if(Objects.isNull(request.getUf())){
+            throw new Exception(Messages.MSG_UF_NOT_FOUND.value());
         }
 
-        log.info("Job CLIMATEMPO - " + request.getIntegracao() + " Iniciado");
+        if(Objects.isNull(request.getIntervalo())){
+            throw new Exception(Messages.MSG_INTERVAL_NOT_FOUND.value());
+        }
+
+        service.start(request.getIntervalo(), request.getCidade(), request.getUf());
+
+        log.info(Messages.MSG_INI_SUCCESS.value());
     }
 
     public void stopTaskOption(JobRequest request) throws Exception {
 
-        if(Objects.isNull(Integrations.fromValue(request.getIntegracao()))){
-            throw new Exception(Messages.MSG_NOT_FOUND.value());
-        }
-
         if(Objects.isNull(request.getCidade())){
-            throw new Exception(Messages.MSG_CITY_NOT_FOUND.value());
+            throw new Exception(Messages.MSG_CIDADE_NOT_FOUND.value());
         }
 
-        switch (Objects.requireNonNull(Integrations.fromValue(request.getIntegracao()))) {
-
-            case INT_RAIN:
-                ctRainCallService.stop();
-                break;
-            case INT_TEMPERATURE:
-                ctTempCallService.stop();
-                break;
-            default:
-                break;
+        if(Objects.isNull(request.getUf())){
+            throw new Exception(Messages.MSG_UF_NOT_FOUND.value());
         }
 
-        log.info("Job CLIMATEMPO -" + request.getIntegracao() + " Finalizado");
+        if(Objects.isNull(request.getIntervalo())){
+            throw new Exception(Messages.MSG_INTERVAL_NOT_FOUND.value());
+        }
+
+        service.stop();
+
+        log.info(Messages.MSG_FIN_SUCCESS.value());
     }
 }

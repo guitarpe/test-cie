@@ -30,15 +30,18 @@ public class ClimateCities {
     @Column(name = "DATE", nullable=false)
     private String date;
 
-    @Column(name = "TEMPERATURE", nullable=false)
-    private String temperature;
+    @Column(name = "TEMP_MIN")
+    private Double tempmin;
 
-    @Column(name = "WIND_SPEED", nullable=false)
-    private Integer windSpeed;
+    @Column(name = "TEMP_MAX")
+    private Double tempmax;
 
-    @Column(name = "DH_INSERT", nullable=false)
-    private LocalDateTime hdInsert;
+    @Column(name = "WIND_SPEED")
+    private Double windSpeed;
 
-    @Column(name = "DH_UPDATE", nullable=false)
-    private LocalDateTime dhUpdate;
+    @Column(name = "WIND_DEG")
+    private Double winddeg;
+
+    @Column(name = "WIND_GUST")
+    private Double windgust;
 }

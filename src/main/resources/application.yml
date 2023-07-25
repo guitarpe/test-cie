@@ -49,7 +49,7 @@ quartz:
         threadPool:
           threadCount: 10
 
-  #autenticação OAuth2
+#autenticação OAuth2
 security:
   oauth2:
     client:
@@ -57,9 +57,8 @@ security:
       client-id: 607c6765-d6c9-4c20-a4ff-c373a3d50794
       client-secret: 5eabc608-8003-4105-8ed1-5cc45c7c5eb8
 
-api-climatempo:
-  token: 4895f3c2ba7a772438c0ace9081d29c3
-  endpoint: http://apiadvisor.climatempo.com.br/api/v1/climate/rain/
-
-api-viacep:
-  endpoint: https://viacep.com.br/ws/
+#api weather
+openweathermap:
+  token: 18100d202b069adfa0fcba767e0caf16
+  endpoint: https://api.openweathermap.org/data/2.5
+  endpoint-geo: http://api.openweathermap.org/geo/1.0

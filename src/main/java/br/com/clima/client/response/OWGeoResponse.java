@@ -1,0 +1,12 @@
+package br.com.clima.client.response;
+
+import lombok.Data;
+
+@Data
+public class OWGeoResponse {
+    public String name;
+    public Long lat;
+    public Long lon;
+    public String country;
+    public String state;
+}

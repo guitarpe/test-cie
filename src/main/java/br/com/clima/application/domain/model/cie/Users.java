@@ -19,7 +19,7 @@ public class Users implements Serializable {
 	public enum Role {USER, ADMIN}
 
 	@Id
-	@Column(name = "USER", nullable=false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column(name = "LOGIN", nullable=false)

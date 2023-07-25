@@ -17,5 +17,5 @@ public class JobDetails {
     private boolean sucesso;
 	private LocalDateTime timestamp;
     private String message;
-    private Objects data;
+    private Object data;
 }
