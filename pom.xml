@@ -3,12 +3,12 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>br.edu.unicesumar</groupId>
-    <artifactId>job-scheduler-unicesumar</artifactId>
+    <groupId>br.com.clima</groupId>
+    <artifactId>job-climate</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
-    <name>job-scheduler-unicesumar</name>
-    <description>Serviço de tarefas agendadas</description>
+    <name>job-climate</name>
+    <description>Serviço de tarefas agendadas para clima</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -21,7 +21,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <start-class>br.edu.unicesumar.diplomaDigital.App</start-class>
+        <start-class>br.com.clima.App</start-class>
         <spring-cloud.version>2020.0.1</spring-cloud.version>
         <log4j2.version>2.17.1</log4j2.version>
     </properties>
@@ -110,11 +110,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.microsoft.sqlserver</groupId>
-            <artifactId>mssql-jdbc</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
         </dependency>
@@ -134,24 +129,6 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.itextpdf</groupId>
-            <artifactId>itextpdf</artifactId>
-            <version>5.5.4</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk15on</artifactId>
-            <version>1.49</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcpkix-jdk15on</artifactId>
-            <version>1.49</version>
         </dependency>
 
         <dependency>
@@ -176,12 +153,6 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
             <version>1.9</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.pdfbox</groupId>
-            <artifactId>pdfbox</artifactId>
-            <version>2.0.22</version>
         </dependency>
 
         <dependency>
@@ -322,12 +293,6 @@
             <artifactId>maven-war-plugin</artifactId>
             <version>3.3.2</version>
             <type>maven-plugin</type>
-        </dependency>
-
-        <dependency>
-            <groupId>org.digidoc4j.dss</groupId>
-            <artifactId>dss-xades</artifactId>
-            <version>5.8.d4j.1</version>
         </dependency>
 
         <dependency>

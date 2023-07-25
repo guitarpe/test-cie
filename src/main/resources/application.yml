@@ -1,7 +1,7 @@
 #servidor
 server:
   host: localhost
-  port: 8080
+  port: 8089
   tomcat:
     max-swallow-size: 800000000
     max-http-form-post-size: 80MB
@@ -14,21 +14,16 @@ spring:
   jpa:
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.SQLServer2012Dialect
+        dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
-        ddl-auto: none
+        ddl-auto: update
     show-sql: false
     open-in-view: false
-  datasource-auxtemp:
-    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    url: jdbc:sqlserver://172.16.0.70:49241;databaseName=Aux_Temp
-    username: sistemas_ead
-    password: sistemas_eadhmg258@
-  datasource-lyceum:
-    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    url: jdbc:sqlserver://172.16.0.70:49241;databaseName=Lyceum
-    username: sistemas_ead
-    password: sistemas_eadhmg258@
+  datasource-ciedb:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://34.151.216.181:5432/postgres
+    username: postgres
+    password: Pez@11272618
   servlet:
     multipart:
       max-file-size: 80MB
@@ -54,7 +49,7 @@ quartz:
         threadPool:
           threadCount: 10
 
-#autenticação OAuth2
+  #autenticação OAuth2
 security:
   oauth2:
     client:
@@ -62,12 +57,9 @@ security:
       client-id: 607c6765-d6c9-4c20-a4ff-c373a3d50794
       client-secret: 5eabc608-8003-4105-8ed1-5cc45c7c5eb8
 
-ws-config:
-  urls:
-    url-endpoint: http://webservicesh.unicesumar.edu.br/ead/soap/index.php?wsdl
-    url-xsi: http://www.w3.org/2001/XMLSchema-instance
-    url-xsd: http://www.w3.org/2001/XMLSchema
-    url-soap-env: http://schemas.xmlsoap.org/soap/envelope/
-  acesso:
-    username: sydle.seed@unicesumar.edu.br
-    password: cRA8edapRawu
+api-climatempo:
+  token: 4895f3c2ba7a772438c0ace9081d29c3
+  endpoint: http://apiadvisor.climatempo.com.br/api/v1/climate/rain/
+
+api-viacep:
+  endpoint: https://viacep.com.br/ws/

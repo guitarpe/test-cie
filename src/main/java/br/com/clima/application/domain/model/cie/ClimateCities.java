@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="TB_CITIES", schema="dbo")
+@Table(name="TB_CITIES")
 @Data
 @ToString
 @RequiredArgsConstructor
