@@ -197,7 +197,7 @@ Parâmetros - Header:
 *Content-type: application/json*  
 *Authorization: Bearer {access_token gerado anteriormente}*  
 
-Parâmetros - Corpo:
+Parâmetros - Corpo (intervalo em milisegundos):
 ```json
 {
     "cidade": "Maceió",
