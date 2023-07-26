@@ -15,9 +15,11 @@ Esta aplicação está configurada para a utilização da porta 8089 e utiliza a
 
 Para esta aplicação é necessário que seja gerado um token que é gerado apenas por usuários aptos para execução. Existe um usuário pré-cadastrado que dá acesso a listagem de usuários cadastrados e o cadastro de um novo.
 
+**Endpoints**
+
 O endpoint de obtenção do token de acesso com base no usuário pré cadastrado é este:
 
-1. Token: /oauth/token
+**1. Token: /oauth/token**  
 Este endpoint é responsável por obter o token a ser usado nas requisições.
 
 Método: POST
@@ -27,7 +29,7 @@ URL: http://localhost:8089/oauth/token
 Parâmetros - Header:
 
 *Content-type: multipart/form-data*  
-*Chache-Control: no-cache*  
+*Cache-Control: no-cache*  
 
 Parâmetros - Corpo (via form-data):
 
@@ -46,7 +48,7 @@ Retorno:
 }
 ```
 
-2. Lista de Usuários: /rest/api-climate/data/controls/users
+**2. Lista de Usuários: /rest/api-climate/data/controls/users**  
 Este endpoint é responsável por obter uma lista de usuários.
 
 Método: GET
@@ -85,7 +87,7 @@ Retorno:
 }
 ```
 
-3. Cadastro de Usuários: /rest/api-climate/data/controls/user/save
+**3. Cadastro de Usuários: /rest/api-climate/data/controls/user/save**  
 Este endpoint é responsável cadastrar um usuário que terá acesso ao endpoint
 
 Método: POST
@@ -126,7 +128,7 @@ Retorno:
 }
 ```
 
-4. Registros da Cidade: /rest/api-climate/data/controls/cities
+**4. Registros da Cidade: /rest/api-climate/data/controls/cities**  
 Este endpoint é responsável por obter os registros de temperatura de uma cidade a partir de um range de datas.
 
 Método: POST
@@ -185,7 +187,7 @@ Retorno:
 }
 ```
 
-5. Start do Job: /rest/api-climate/jobs/controls/start
+**5. Start do Job: /rest/api-climate/jobs/controls/start**  
 Este endpoint é responsável iniciar o registro das temperatura e velocidade do vento mediante parâmetros informados na requisição
 
 Método: POST
@@ -217,7 +219,7 @@ Retorno:
 }
 ```
 
-6. Stop do Job: /rest/api-climate/jobs/controls/stop
+**6. Stop do Job: /rest/api-climate/jobs/controls/stop**  
 Este endpoint é responsável finalizar o registro das temperatura e velocidade do vento mediante parâmetros informados na requisição
 
 Método: POST
@@ -250,6 +252,7 @@ Retorno:
 ```
 
 **Considerações Finais**  
+
 Esta aplicação trata-se de um teste, nela é utilizado a API da OpenWeather para obtenção dos dados referentes a temperatura e também a utilização do ambiente Google Cloud para acesso ao banco de dados postgree.
 
 Obs.: Nesta aplicação não fui utilizada o conceito de Thread para execução de vários Jobs ao mesmo tempo, possibilitando o start/stop de forma específica. Os arquivos de configuração para acesso ao banco de dados e criação das tabelas estão em src\main\resources
