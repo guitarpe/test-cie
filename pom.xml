@@ -325,8 +325,8 @@
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
-                    <url>http://localhost:8080/manager/text</url>
-                    <path>/DeployMavenDiplomaDigitalXml</path>
+                    <url>http://localhost:8089/manager/text</url>
+                    <path>/Temperatura</path>
                     <update>true</update>
                     <username>tomcat</username>
                     <password>tomcat</password>

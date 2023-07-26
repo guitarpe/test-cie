@@ -6,9 +6,6 @@ server:
     max-swallow-size: 800000000
     max-http-form-post-size: 80MB
 
-aplicacao:
-  versao: 1.6
-
 #Spring
 spring:
   spring:
