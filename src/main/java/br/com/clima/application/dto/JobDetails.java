@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 @Builder
 @Data
@@ -14,7 +13,7 @@ import java.util.Objects;
 @NoArgsConstructor
 public class JobDetails {
     private long code;
-    private boolean sucesso;
+    private boolean success;
 	private LocalDateTime timestamp;
     private String message;
     private Object data;

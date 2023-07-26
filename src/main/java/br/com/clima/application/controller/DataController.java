@@ -46,10 +46,10 @@ public class DataController {
 
         return ResponseEntity.ok().body(JobDetails.builder()
                         .code(200)
-                        .sucesso(true)
+                        .success(true)
                         .timestamp(LocalDateTime.now())
                         .data(response.getData())
-                        .message(Messages.MSG_INI_SUCCESS.value()).build());
+                        .message(Messages.MSG_SUCCESS.value()).build());
     }
 
     @GetMapping(value="/users",
@@ -65,10 +65,10 @@ public class DataController {
 
         return ResponseEntity.ok().body(JobDetails.builder()
                         .code(200)
-                        .sucesso(true)
+                        .success(true)
                         .timestamp(LocalDateTime.now())
                         .data(response.getData())
-                        .message(Messages.MSG_INI_SUCCESS.value()).build());
+                        .message(Messages.MSG_SUCCESS.value()).build());
     }
 
     @PostMapping(value="/user/save",
@@ -84,9 +84,9 @@ public class DataController {
 
         return ResponseEntity.ok().body(JobDetails.builder()
                         .code(200)
-                        .sucesso(true)
+                        .success(true)
                         .timestamp(LocalDateTime.now())
                         .data(response.getData())
-                        .message(Messages.MSG_INI_SUCCESS.value()).build());
+                        .message(Messages.MSG_SUCCESS.value()).build());
     }
 }

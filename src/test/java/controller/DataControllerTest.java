@@ -86,14 +86,14 @@ public class DataControllerTest {
                 Users.builder().id(3L).username("user3").password("pass3").status('A').role(Users.Role.USER).build()
         );
 
-        when(userService.getAllUsers()).thenReturn(users);
+        when(userService.getAllUsers()).thenReturn((CallResponse) users);
         ResponseEntity<JobDetails> result = controller.getUsers();
         verify(userService, times(1)).getAllUsers();
         assertEquals(users, Objects.requireNonNull(result.getBody()).getData());
     }
 
     @Test
-    public void saveUserTest(){
+    public void saveUserTest() throws Exception {
 
         UserRequest user = new UserRequest();
         user.setUsername("user4");
@@ -104,8 +104,7 @@ public class DataControllerTest {
         Users userReturn = Users.builder().id(4L)
                 .username("user4").password("pass4").status('A').role(Users.Role.ADMIN).build();
 
-        when(userService.saveUser(user)).thenReturn(userReturn);
-        Users result = userService.saveUser(user);
+        CallResponse result = userService.saveUser(user);
         verify(userService).saveUser(user);
         assertTrue(Objects.nonNull(result));
     }

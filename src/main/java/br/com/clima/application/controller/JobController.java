@@ -3,7 +3,6 @@ package br.com.clima.application.controller;
 import br.com.clima.application.dto.CallResponse;
 import br.com.clima.application.dto.JobRequest;
 import br.com.clima.application.dto.JobDetails;
-import br.com.clima.application.enuns.Messages;
 import br.com.clima.application.tasks.CallTasks;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +36,7 @@ public class JobController {
 
         return ResponseEntity.ok().body(JobDetails.builder()
                 .code(200)
-                .sucesso(true)
+                .success(true)
                 .timestamp(LocalDateTime.now())
                 .message(response.getMensagem()).build());
     }
@@ -55,7 +54,7 @@ public class JobController {
 
         return ResponseEntity.ok().body(JobDetails.builder()
                 .code(200)
-                .sucesso(true)
+                .success(true)
                 .timestamp(LocalDateTime.now())
                 .message(response.getMensagem()).build());
     }
