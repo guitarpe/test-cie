@@ -17,7 +17,7 @@ Para esta aplicação é necessário que seja gerado um token que é gerado apen
 
 **Endpoints**
 
-O endpoint de obtenção do token de acesso com base no usuário pré cadastrado é este:
+O endpoint de obtenção do token de acesso com base no usuário pré cadastrado. Logo mais abaixo temos alguns exemplos, que inclusive podem ser configurados no Postman par ateste. O primeiro endpont trata-se da obtenção do token, nele está descrita as informações referentes ao usuário padrão pré-cadastrado.
 
 **1. Token: /oauth/token**  
 Este endpoint é responsável por obter o token a ser usado nas requisições.
