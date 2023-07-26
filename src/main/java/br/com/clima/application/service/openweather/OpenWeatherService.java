@@ -6,6 +6,7 @@ import br.com.clima.application.service.ClimateCitiesService;
 import br.com.clima.client.APIOpenWeather;
 import br.com.clima.client.response.OWGeoResponse;
 import br.com.clima.client.response.OWResponse;
+import br.com.clima.util.Utils;
 import com.google.gson.Gson;
 import feign.Feign;
 import feign.gson.GsonDecoder;
@@ -69,12 +70,12 @@ public class OpenWeatherService {
 
     public void climateRegister(String city, String uf) throws Exception {
 
-        OWGeoResponse geolocation = getGeolocationClient(city, uf);
+        OWGeoResponse geolocation = getGeolocationClient(Utils.removeAccentuation(city), uf);
 
         APIOpenWeather client = getAPIClient(geolocation.lat, geolocation.lon);
         OWResponse response = client.getWheatherCity();
 
-        String format = "dd/MM/yyyy";
+        String format = "yyyy-MM-dd";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
         String dateFormatNow = LocalDateTime.now().format(formatter);
 

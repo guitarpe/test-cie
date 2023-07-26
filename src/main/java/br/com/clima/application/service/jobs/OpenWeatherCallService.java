@@ -1,4 +1,4 @@
-package br.com.clima.application.service;
+package br.com.clima.application.service.jobs;
 
 import br.com.clima.application.service.openweather.OpenWeatherService;
 import lombok.RequiredArgsConstructor;

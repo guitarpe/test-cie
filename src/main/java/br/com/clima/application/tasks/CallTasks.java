@@ -4,7 +4,7 @@ import br.com.clima.application.dto.CallResponse;
 import br.com.clima.application.dto.JobRequest;
 import br.com.clima.application.enuns.Messages;
 
-import br.com.clima.application.service.OpenWeatherCallService;
+import br.com.clima.application.service.jobs.OpenWeatherCallService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
