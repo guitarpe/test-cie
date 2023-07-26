@@ -1,7 +1,7 @@
 package br.com.clima.config;
 
 import br.com.clima.application.domain.repository.cie.IUsersRepository;
-import br.com.clima.application.dto.User;
+import br.com.clima.application.dto.UserDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -26,7 +26,7 @@ public class WebSecurityServerConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	public void authenticationManager(AuthenticationManagerBuilder auth, final IUsersRepository usersRepository) throws Exception {
 
-		auth.userDetailsService(username -> new User(usersRepository.findByUsername(username)));
+		auth.userDetailsService(username -> new UserDTO(usersRepository.findByUsername(username)));
 		//.passwordEncoder(passwordEncoder());
 	}
 

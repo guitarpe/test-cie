@@ -1,6 +1,6 @@
 package br.com.clima.application.service.jobs;
 
-import br.com.clima.application.service.openweather.OpenWeatherService;
+import br.com.clima.application.service.jobs.openweather.OpenWeatherService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;

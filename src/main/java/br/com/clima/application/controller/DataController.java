@@ -1,12 +1,12 @@
 package br.com.clima.application.controller;
 
-import br.com.clima.application.dto.CallResponse;
-import br.com.clima.application.dto.CitiesRequest;
-import br.com.clima.application.dto.JobDetails;
-import br.com.clima.application.dto.UserRequest;
+import br.com.clima.application.service.data.response.DataResponse;
+import br.com.clima.application.dto.CitiesDTO;
+import br.com.clima.application.service.data.response.JobResponse;
+import br.com.clima.application.service.data.request.UserRequest;
 import br.com.clima.application.enuns.Messages;
-import br.com.clima.application.service.ClimateCitiesService;
-import br.com.clima.application.service.UserService;
+import br.com.clima.application.service.data.ClimateCitiesService;
+import br.com.clima.application.service.data.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +31,9 @@ public class DataController {
     @PostMapping(value="/cities",
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<JobDetails> getInfoCities(@Valid @RequestBody CitiesRequest request) throws Exception {
+    public ResponseEntity<JobResponse> getInfoCities(@Valid @RequestBody CitiesDTO request) throws Exception {
 
-        CallResponse response = climateCitiesService.getCitiesInterval(
+        DataResponse response = climateCitiesService.getCitiesInterval(
                 request.getCidade(),
                 request.getUf(),
                 new Date(request.getDataInicio()),
@@ -44,7 +44,7 @@ public class DataController {
             throw new EntityNotFoundException(response.getMensagem());
         }
 
-        return ResponseEntity.ok().body(JobDetails.builder()
+        return ResponseEntity.ok().body(JobResponse.builder()
                         .code(200)
                         .success(true)
                         .timestamp(LocalDateTime.now())
@@ -55,15 +55,15 @@ public class DataController {
     @GetMapping(value="/users",
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<JobDetails> getUsers() throws Exception {
+    public ResponseEntity<JobResponse> getUsers() throws Exception {
 
-        CallResponse response =  userService.getAllUsers();
+        DataResponse response =  userService.getAllUsers();
 
         if(!response.isStatus()) {
             throw new EntityNotFoundException(response.getMensagem());
         }
 
-        return ResponseEntity.ok().body(JobDetails.builder()
+        return ResponseEntity.ok().body(JobResponse.builder()
                         .code(200)
                         .success(true)
                         .timestamp(LocalDateTime.now())
@@ -74,15 +74,15 @@ public class DataController {
     @PostMapping(value="/user/save",
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<JobDetails> saveUser(@Valid @RequestBody UserRequest request) throws Exception {
+    public ResponseEntity<JobResponse> saveUser(@Valid @RequestBody UserRequest request) throws Exception {
 
-        CallResponse response = userService.saveUser(request);
+        DataResponse response = userService.saveUser(request);
 
         if(!response.isStatus()) {
             throw new EntityNotFoundException(response.getMensagem());
         }
 
-        return ResponseEntity.ok().body(JobDetails.builder()
+        return ResponseEntity.ok().body(JobResponse.builder()
                         .code(200)
                         .success(true)
                         .timestamp(LocalDateTime.now())

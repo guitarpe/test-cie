@@ -13,7 +13,7 @@ import java.util.Set;
 
 @Getter
 @Setter
-public class User implements UserDetails {
+public class UserDTO implements UserDetails {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -21,11 +21,10 @@ public class User implements UserDetails {
 	
 	private final Users user;
 
-	public User(Users user) {
+	public UserDTO(Users user) {
 		this.user = user;
     }
 	
-	@SuppressWarnings("unused")
 	@Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 	    final Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();

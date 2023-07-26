@@ -3,7 +3,6 @@ package br.com.clima.application.domain.model.cie;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name="tb_cities")

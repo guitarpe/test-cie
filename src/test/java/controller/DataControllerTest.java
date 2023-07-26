@@ -3,12 +3,12 @@ package controller;
 import br.com.clima.application.controller.DataController;
 import br.com.clima.application.domain.model.cie.ClimateCities;
 import br.com.clima.application.domain.model.cie.Users;
-import br.com.clima.application.dto.CallResponse;
-import br.com.clima.application.dto.CitiesRequest;
-import br.com.clima.application.dto.JobDetails;
-import br.com.clima.application.dto.UserRequest;
-import br.com.clima.application.service.ClimateCitiesService;
-import br.com.clima.application.service.UserService;
+import br.com.clima.application.service.data.response.DataResponse;
+import br.com.clima.application.dto.CitiesDTO;
+import br.com.clima.application.service.data.response.JobResponse;
+import br.com.clima.application.service.data.request.UserRequest;
+import br.com.clima.application.service.data.ClimateCitiesService;
+import br.com.clima.application.service.data.UserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +20,6 @@ import org.springframework.http.ResponseEntity;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-import java.time.LocalDateTime;
 import java.util.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -42,7 +41,7 @@ public class DataControllerTest {
 
     @Test
     public void getInfoCitiesTest() throws Exception {
-        CitiesRequest cities = new CitiesRequest();
+        CitiesDTO cities = new CitiesDTO();
         cities.setCidade("Maceió");
         cities.setUf("AL");
         cities.setDataInicio("2023-07-21");
@@ -60,7 +59,7 @@ public class DataControllerTest {
                                     .windgust(0.0)
                                     .windSpeed(0.0).build();
 
-        CallResponse response = CallResponse.builder()
+        DataResponse response = DataResponse.builder()
                 .status(true)
                 .mensagem("Sucesso")
                 .data(Collections.singletonList(climateCities))
@@ -71,7 +70,7 @@ public class DataControllerTest {
                 new Date(cities.getDataInicio()), new Date(cities.getDataFinal())))
                 .thenReturn(response);
 
-        ResponseEntity<JobDetails> result = controller.getInfoCities(cities);
+        ResponseEntity<JobResponse> result = controller.getInfoCities(cities);
         verify(climateCitiesService, times(1)).getCitiesInterval(
                 cities.getCidade(), cities.getUf(),
                 new Date(cities.getDataInicio()), new Date(cities.getDataFinal()));
@@ -86,8 +85,8 @@ public class DataControllerTest {
                 Users.builder().id(3L).username("user3").password("pass3").status('A').role(Users.Role.USER).build()
         );
 
-        when(userService.getAllUsers()).thenReturn((CallResponse) users);
-        ResponseEntity<JobDetails> result = controller.getUsers();
+        when(userService.getAllUsers()).thenReturn((DataResponse) users);
+        ResponseEntity<JobResponse> result = controller.getUsers();
         verify(userService, times(1)).getAllUsers();
         assertEquals(users, Objects.requireNonNull(result.getBody()).getData());
     }
@@ -104,7 +103,7 @@ public class DataControllerTest {
         Users userReturn = Users.builder().id(4L)
                 .username("user4").password("pass4").status('A').role(Users.Role.ADMIN).build();
 
-        CallResponse result = userService.saveUser(user);
+        DataResponse result = userService.saveUser(user);
         verify(userService).saveUser(user);
         assertTrue(Objects.nonNull(result));
     }

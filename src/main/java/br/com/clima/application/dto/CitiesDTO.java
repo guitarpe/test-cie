@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
-public class CitiesRequest {
+public class CitiesDTO {
     @JsonProperty(value="cidade", required = true)
     @NotNull(message="É necessário informar a cidade")
     private String cidade;

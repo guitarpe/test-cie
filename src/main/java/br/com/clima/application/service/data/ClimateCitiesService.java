@@ -1,8 +1,8 @@
-package br.com.clima.application.service;
+package br.com.clima.application.service.data;
 
 import br.com.clima.application.domain.model.cie.ClimateCities;
 import br.com.clima.application.domain.repository.cie.IClimateCitiesRepository;
-import br.com.clima.application.dto.CallResponse;
+import br.com.clima.application.service.data.response.DataResponse;
 import br.com.clima.application.enuns.Messages;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,11 +19,11 @@ public class ClimateCitiesService {
 
     IClimateCitiesRepository repository;
 
-    public CallResponse getCitiesInterval(String name, String uf, Date dtIni, Date dtFim) throws Exception{
+    public DataResponse getCitiesInterval(String name, String uf, Date dtIni, Date dtFim) throws Exception{
         try{
             List<ClimateCities> list = repository.findClimateCitiesByNameAndAndStateAndDateBetween(name, uf, dtIni, dtFim);
 
-            return CallResponse.builder()
+            return DataResponse.builder()
                     .status(true)
                     .mensagem(Messages.MSG_SUCCESS.value())
                     .data(list).build();
@@ -32,11 +32,11 @@ public class ClimateCitiesService {
         }
     }
 
-    public CallResponse saveTemperatureCity(ClimateCities climate) throws Exception{
+    public DataResponse saveTemperatureCity(ClimateCities climate) throws Exception{
         try{
             repository.save(climate);
 
-            return CallResponse.builder()
+            return DataResponse.builder()
                     .status(true)
                     .mensagem(Messages.MSG_SAVE_SUCCESS.value())
                     .data(null).build();

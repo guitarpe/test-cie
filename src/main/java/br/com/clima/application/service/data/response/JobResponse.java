@@ -1,4 +1,4 @@
-package br.com.clima.application.dto;
+package br.com.clima.application.service.data.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class JobDetails {
+public class JobResponse {
     private long code;
     private boolean success;
 	private LocalDateTime timestamp;

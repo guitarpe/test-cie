@@ -1,19 +1,15 @@
-package br.com.clima.application.service;
+package br.com.clima.application.service.data;
 
 import br.com.clima.application.domain.model.cie.Users;
 import br.com.clima.application.domain.repository.cie.IUsersRepository;
-import br.com.clima.application.dto.CallResponse;
-import br.com.clima.application.dto.UserRequest;
+import br.com.clima.application.service.data.response.DataResponse;
+import br.com.clima.application.service.data.request.UserRequest;
 import br.com.clima.application.enuns.Messages;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,11 +20,11 @@ public class UserService {
 
     IUsersRepository usersRepository;
 
-    public CallResponse getAllUsers() throws Exception{
+    public DataResponse getAllUsers() throws Exception{
         try{
             List<Users> list = usersRepository.findAll();
 
-            return CallResponse.builder()
+            return DataResponse.builder()
                     .status(true)
                     .mensagem(Messages.MSG_SUCCESS.value())
                     .data(list).build();
@@ -37,7 +33,7 @@ public class UserService {
         }
     }
 
-    public CallResponse saveUser(UserRequest request) throws Exception{
+    public DataResponse saveUser(UserRequest request) throws Exception{
         try{
             Users user = Users.builder()
                                 .username(request.getUsername())
@@ -48,7 +44,7 @@ public class UserService {
             if(Objects.isNull(usersRepository.findByUsername(request.getUsername())))
                 usersRepository.save(user);
 
-            return CallResponse.builder()
+            return DataResponse.builder()
                     .status(true)
                     .mensagem(Messages.MSG_SUCCESS.value())
                     .data(user).build();

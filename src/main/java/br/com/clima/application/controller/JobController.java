@@ -1,8 +1,8 @@
 package br.com.clima.application.controller;
 
-import br.com.clima.application.dto.CallResponse;
-import br.com.clima.application.dto.JobRequest;
-import br.com.clima.application.dto.JobDetails;
+import br.com.clima.application.service.data.response.DataResponse;
+import br.com.clima.application.service.data.request.JobRequest;
+import br.com.clima.application.service.data.response.JobResponse;
 import br.com.clima.application.tasks.CallTasks;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,15 +26,15 @@ public class JobController {
     @PostMapping(value="/start",
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<JobDetails> startJob(@Valid @RequestBody JobRequest request) throws Exception {
+    public ResponseEntity<JobResponse> startJob(@Valid @RequestBody JobRequest request) throws Exception {
 
-        CallResponse response = callTasks.startTaskOption(request);
+        DataResponse response = callTasks.startTaskOption(request);
 
         if(!response.isStatus()) {
             throw new EntityNotFoundException(response.getMensagem());
         }
 
-        return ResponseEntity.ok().body(JobDetails.builder()
+        return ResponseEntity.ok().body(JobResponse.builder()
                 .code(200)
                 .success(true)
                 .timestamp(LocalDateTime.now())
@@ -44,15 +44,15 @@ public class JobController {
     @PostMapping(value="/stop",
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<JobDetails> stopJob(@Valid @RequestBody JobRequest request) throws Exception {
+    public ResponseEntity<JobResponse> stopJob(@Valid @RequestBody JobRequest request) throws Exception {
 
-        CallResponse response = callTasks.stopTaskOption(request);
+        DataResponse response = callTasks.stopTaskOption(request);
 
         if(!response.isStatus()) {
             throw new EntityNotFoundException(response.getMensagem());
         }
 
-        return ResponseEntity.ok().body(JobDetails.builder()
+        return ResponseEntity.ok().body(JobResponse.builder()
                 .code(200)
                 .success(true)
                 .timestamp(LocalDateTime.now())

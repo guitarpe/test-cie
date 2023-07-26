@@ -1,9 +1,9 @@
 package controller;
 
 import br.com.clima.application.controller.JobController;
-import br.com.clima.application.dto.CallResponse;
-import br.com.clima.application.dto.JobDetails;
-import br.com.clima.application.dto.JobRequest;
+import br.com.clima.application.service.data.response.DataResponse;
+import br.com.clima.application.service.data.response.JobResponse;
+import br.com.clima.application.service.data.request.JobRequest;
 import br.com.clima.application.tasks.CallTasks;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -38,13 +38,13 @@ public class JobControllerTest {
     @Test
     public void testStartJob_Success() throws Exception {
         JobRequest request = new JobRequest();
-        CallResponse response = CallResponse.builder().build();
+        DataResponse response = DataResponse.builder().build();
         response.setStatus(true);
         response.setMensagem("Task started successfully");
 
         when(callTasks.startTaskOption(request)).thenReturn(response);
 
-        ResponseEntity<JobDetails> result = jobController.startJob(request);
+        ResponseEntity<JobResponse> result = jobController.startJob(request);
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
         assertEquals(200, Objects.requireNonNull(result.getBody()).getCode());
@@ -57,7 +57,7 @@ public class JobControllerTest {
     @Test
     public void testStartJob_Failure() throws Exception {
         JobRequest request = new JobRequest();
-        CallResponse response = CallResponse.builder().build();
+        DataResponse response = DataResponse.builder().build();
         response.setStatus(false);
         response.setMensagem("Failed to start task");
 

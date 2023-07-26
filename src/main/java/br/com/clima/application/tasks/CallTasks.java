@@ -1,7 +1,7 @@
 package br.com.clima.application.tasks;
 
-import br.com.clima.application.dto.CallResponse;
-import br.com.clima.application.dto.JobRequest;
+import br.com.clima.application.service.data.response.DataResponse;
+import br.com.clima.application.service.data.request.JobRequest;
 import br.com.clima.application.enuns.Messages;
 
 import br.com.clima.application.service.jobs.OpenWeatherCallService;
@@ -19,23 +19,13 @@ public class CallTasks {
 
     private final OpenWeatherCallService service;
 
-    public CallResponse startTaskOption(JobRequest request) throws Exception {
+    public DataResponse startTaskOption(JobRequest request) throws Exception {
         try {
-            if (Objects.isNull(request.getCidade())) {
-                throw new Exception(Messages.MSG_CIDADE_NOT_FOUND.value());
-            }
-
-            if (Objects.isNull(request.getUf())) {
-                throw new Exception(Messages.MSG_UF_NOT_FOUND.value());
-            }
-
-            if (Objects.isNull(request.getIntervalo())) {
-                throw new Exception(Messages.MSG_INTERVAL_NOT_FOUND.value());
-            }
+            verifyInfoRequest(request);
 
             service.start(request.getIntervalo(), request.getCidade(), request.getUf());
 
-            return CallResponse.builder()
+            return DataResponse.builder()
                     .status(true)
                     .mensagem(Messages.MSG_INI_SUCCESS.value())
                     .data(null).build();
@@ -45,23 +35,27 @@ public class CallTasks {
         }
     }
 
-    public CallResponse stopTaskOption(JobRequest request) throws Exception {
+    private void verifyInfoRequest(JobRequest request) throws Exception {
+        if (Objects.isNull(request.getCidade())) {
+            throw new Exception(Messages.MSG_CIDADE_NOT_FOUND.value());
+        }
+
+        if (Objects.isNull(request.getUf())) {
+            throw new Exception(Messages.MSG_UF_NOT_FOUND.value());
+        }
+
+        if (Objects.isNull(request.getIntervalo())) {
+            throw new Exception(Messages.MSG_INTERVAL_NOT_FOUND.value());
+        }
+    }
+
+    public DataResponse stopTaskOption(JobRequest request) throws Exception {
         try{
-            if(Objects.isNull(request.getCidade())){
-                throw new Exception(Messages.MSG_CIDADE_NOT_FOUND.value());
-            }
-
-            if(Objects.isNull(request.getUf())){
-                throw new Exception(Messages.MSG_UF_NOT_FOUND.value());
-            }
-
-            if(Objects.isNull(request.getIntervalo())){
-                throw new Exception(Messages.MSG_INTERVAL_NOT_FOUND.value());
-            }
+            verifyInfoRequest(request);
 
             service.stop();
 
-            return CallResponse.builder()
+            return DataResponse.builder()
                     .status(true)
                     .mensagem(Messages.MSG_FIN_SUCCESS.value())
                     .data(null).build();

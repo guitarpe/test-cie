@@ -1,8 +1,8 @@
-package br.com.clima.application.service.openweather;
+package br.com.clima.application.service.jobs.openweather;
 
 import br.com.clima.application.domain.model.cie.ClimateCities;
 import br.com.clima.application.exceptions.CustomErrorDecoder;
-import br.com.clima.application.service.ClimateCitiesService;
+import br.com.clima.application.service.data.ClimateCitiesService;
 import br.com.clima.client.APIOpenWeather;
 import br.com.clima.client.response.OWGeoResponse;
 import br.com.clima.client.response.OWResponse;

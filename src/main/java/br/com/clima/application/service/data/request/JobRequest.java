@@ -1,4 +1,4 @@
-package br.com.clima.application.dto;
+package br.com.clima.application.service.data.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
