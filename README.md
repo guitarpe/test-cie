@@ -251,3 +251,5 @@ Retorno:
 
 **Considerações Finais**  
 Esta aplicação trata-se de um teste, nela é utilizado a API da OpenWeather para obtenção dos dados referentes a temperatura e também a utilização do ambiente Google Cloud para acesso ao banco de dados postgree.
+
+Obs.: Nesta aplicação não fui utilizada o conceito de Thread para execução de vários Jobs ao mesmo tempo, possibilitando o start/stop de forma específica
