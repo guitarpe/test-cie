@@ -1,5 +1,6 @@
 package br.com.clima.application.controller;
 
+import br.com.clima.application.dto.CallResponse;
 import br.com.clima.application.dto.JobRequest;
 import br.com.clima.application.dto.JobDetails;
 import br.com.clima.application.enuns.Messages;
@@ -11,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 
@@ -27,13 +29,17 @@ public class JobController {
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<JobDetails> startJob(@Valid @RequestBody JobRequest request) throws Exception {
 
-        callTasks.startTaskOption(request);
+        CallResponse response = callTasks.startTaskOption(request);
+
+        if(!response.isStatus()) {
+            throw new EntityNotFoundException(response.getMensagem());
+        }
 
         return ResponseEntity.ok().body(JobDetails.builder()
                 .code(200)
                 .sucesso(true)
                 .timestamp(LocalDateTime.now())
-                .message(Messages.MSG_INI_SUCCESS.value()).build());
+                .message(response.getMensagem()).build());
     }
 
     @PostMapping(value="/stop",
@@ -41,12 +47,16 @@ public class JobController {
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<JobDetails> stopJob(@Valid @RequestBody JobRequest request) throws Exception {
 
-        callTasks.stopTaskOption(request);
+        CallResponse response = callTasks.stopTaskOption(request);
+
+        if(!response.isStatus()) {
+            throw new EntityNotFoundException(response.getMensagem());
+        }
 
         return ResponseEntity.ok().body(JobDetails.builder()
                 .code(200)
                 .sucesso(true)
                 .timestamp(LocalDateTime.now())
-                .message(Messages.MSG_FIN_SUCCESS.value()).build());
+                .message(response.getMensagem()).build());
     }
 }

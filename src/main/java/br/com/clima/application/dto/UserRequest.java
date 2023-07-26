@@ -20,7 +20,7 @@ public class UserRequest {
 
     @JsonProperty(value="status", required = true)
     @NotNull(message="É necessário informar o status do usuário")
-    private String status;
+    private char status;
 
     @JsonProperty(value="perfil", required = true)
     @NotNull(message="É necessário informar o perfil do usuário")

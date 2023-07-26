@@ -3,6 +3,7 @@ package controller;
 import br.com.clima.application.controller.DataController;
 import br.com.clima.application.domain.model.cie.ClimateCities;
 import br.com.clima.application.domain.model.cie.Users;
+import br.com.clima.application.dto.CallResponse;
 import br.com.clima.application.dto.CitiesRequest;
 import br.com.clima.application.dto.JobDetails;
 import br.com.clima.application.dto.UserRequest;
@@ -51,15 +52,24 @@ public class DataControllerTest {
                                     .name("Maceió")
                                     .state("AL")
                                     .contry("BR")
-                                    .temperature("0")
                                     .date("2023-07-07")
-                                    .windSpeed(null)
-                                    .hdInsert(LocalDateTime.now()).build();
+                                    .tempmin(0.0)
+                                    .tempmax(0.0)
+                                    .windSpeed(0.0)
+                                    .winddeg(0.0)
+                                    .windgust(0.0)
+                                    .windSpeed(0.0).build();
+
+        CallResponse response = CallResponse.builder()
+                .status(true)
+                .mensagem("Sucesso")
+                .data(Collections.singletonList(climateCities))
+                .build();
 
         when(climateCitiesService.getCitiesInterval(
                 cities.getCidade(), cities.getUf(),
                 new Date(cities.getDataInicio()), new Date(cities.getDataFinal())))
-                .thenReturn(Collections.singletonList(climateCities));
+                .thenReturn(response);
 
         ResponseEntity<JobDetails> result = controller.getInfoCities(cities);
         verify(climateCitiesService, times(1)).getCitiesInterval(
@@ -71,9 +81,9 @@ public class DataControllerTest {
     @Test
     public void getUsersTest() throws Exception {
         List<Users> users = Arrays.asList(
-                Users.builder().id(1L).username("user1").password("pass1").status("A").role(Users.Role.ADMIN).build(),
-                Users.builder().id(2L).username("user2").password("pass2").status("A").role(Users.Role.USER).build(),
-                Users.builder().id(3L).username("user3").password("pass3").status("A").role(Users.Role.USER).build()
+                Users.builder().id(1L).username("user1").password("pass1").status('A').role(Users.Role.ADMIN).build(),
+                Users.builder().id(2L).username("user2").password("pass2").status('A').role(Users.Role.USER).build(),
+                Users.builder().id(3L).username("user3").password("pass3").status('A').role(Users.Role.USER).build()
         );
 
         when(userService.getAllUsers()).thenReturn(users);
@@ -88,11 +98,11 @@ public class DataControllerTest {
         UserRequest user = new UserRequest();
         user.setUsername("user4");
         user.setPassword("pass4");
-        user.setStatus("A");
+        user.setStatus('A');
         user.setPerfil("ADMIN");
 
         Users userReturn = Users.builder().id(4L)
-                .username("user4").password("pass4").status("A").role(Users.Role.ADMIN).build();
+                .username("user4").password("pass4").status('A').role(Users.Role.ADMIN).build();
 
         when(userService.saveUser(user)).thenReturn(userReturn);
         Users result = userService.saveUser(user);

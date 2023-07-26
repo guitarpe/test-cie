@@ -1,7 +1,6 @@
 package br.com.clima.application.controller;
 
-import br.com.clima.application.domain.model.cie.ClimateCities;
-import br.com.clima.application.domain.model.cie.Users;
+import br.com.clima.application.dto.CallResponse;
 import br.com.clima.application.dto.CitiesRequest;
 import br.com.clima.application.dto.JobDetails;
 import br.com.clima.application.dto.UserRequest;
@@ -15,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -34,18 +34,22 @@ public class DataController {
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<JobDetails> getInfoCities(@Valid @RequestBody CitiesRequest request) throws Exception {
 
-        List<ClimateCities> list = climateCitiesService.getCitiesInterval(
+        CallResponse response = climateCitiesService.getCitiesInterval(
                 request.getCidade(),
                 request.getUf(),
                 new Date(request.getDataInicio()),
                 new Date(request.getDataFinal())
         );
 
+        if(!response.isStatus()) {
+            throw new EntityNotFoundException(response.getMensagem());
+        }
+
         return ResponseEntity.ok().body(JobDetails.builder()
                         .code(200)
                         .sucesso(true)
                         .timestamp(LocalDateTime.now())
-                        .data(list)
+                        .data(response.getData())
                         .message(Messages.MSG_INI_SUCCESS.value()).build());
     }
 
@@ -54,13 +58,17 @@ public class DataController {
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<JobDetails> getUsers() throws Exception {
 
-        List<Users> list = userService.getAllUsers();
+        CallResponse response =  userService.getAllUsers();
+
+        if(!response.isStatus()) {
+            throw new EntityNotFoundException(response.getMensagem());
+        }
 
         return ResponseEntity.ok().body(JobDetails.builder()
                         .code(200)
                         .sucesso(true)
                         .timestamp(LocalDateTime.now())
-                        .data(list)
+                        .data(response.getData())
                         .message(Messages.MSG_INI_SUCCESS.value()).build());
     }
 
@@ -69,13 +77,17 @@ public class DataController {
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<JobDetails> saveUser(@Valid @RequestBody UserRequest request) throws Exception {
 
-        Users user = userService.saveUser(request);
+        CallResponse response = userService.saveUser(request);
+
+        if(!response.isStatus()) {
+            throw new EntityNotFoundException(response.getMensagem());
+        }
 
         return ResponseEntity.ok().body(JobDetails.builder()
                         .code(200)
                         .sucesso(true)
                         .timestamp(LocalDateTime.now())
-                        .data(user)
+                        .data(response.getData())
                         .message(Messages.MSG_INI_SUCCESS.value()).build());
     }
 }

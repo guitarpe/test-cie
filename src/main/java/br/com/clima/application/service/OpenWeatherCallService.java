@@ -2,6 +2,7 @@ package br.com.clima.application.service;
 
 import br.com.clima.application.service.openweather.OpenWeatherService;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,8 @@ import java.util.TimerTask;
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class OpenWeatherCallService {
-    OpenWeatherService service;
+
+    private final OpenWeatherService service;
 
     private Timer timer;
 
@@ -35,6 +37,7 @@ public class OpenWeatherCallService {
             this.uf = uf;
         }
 
+        @SneakyThrows
         @Override
         public void run() {service.climateRegister(city, uf);}
     }

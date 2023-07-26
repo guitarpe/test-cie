@@ -11,16 +11,21 @@ aplicacao:
 
 #Spring
 spring:
+  spring:
+    devtools:
+      add-properties: false
   jpa:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
         ddl-auto: update
+        temp:
+          use_jdbc_metadata_defaults: false
     show-sql: false
     open-in-view: false
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
   datasource-ciedb:
-    driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://34.151.216.181:5432/postgres
     username: postgres
     password: Pez@11272618
@@ -34,8 +39,9 @@ spring:
 logging:
   level:
     root: INFO
+    web: DEBUG
     com.sample.feign.demofeigncustomconfig: INFO
-    br.edu.unicesumar: INFO
+    br.com.clima: INFO
     org.springframework.web.client: INFO
     org.springframework.security.oauth2: INFO
 

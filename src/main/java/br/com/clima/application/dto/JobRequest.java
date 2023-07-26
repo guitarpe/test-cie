@@ -9,11 +9,11 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 public class JobRequest {
-    @JsonProperty(value="cep", required = true)
+    @JsonProperty(value="cidade", required = true)
     @NotNull(message="É necessário adicionar a cidade que deseja consultar")
     private String cidade;
 
-    @JsonProperty(value="cep", required = true)
+    @JsonProperty(value="uf", required = true)
     @NotNull(message="É necessário adicionar a UF da cidade que deseja consultar")
     private String uf;
 

@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name="TB_USERS")
+@Table(name="tb_users")
 @Data
 @ToString
 @RequiredArgsConstructor
@@ -22,16 +22,16 @@ public class Users implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "LOGIN", nullable=false)
+	@Column(name = "login", nullable=false)
 	private String username;
 	
-	@Column(name = "PASSWORD", nullable=false)
+	@Column(name = "password", nullable=false)
 	private String password;
 	
-	@Column(name = "STATUS", nullable=false)
-	private String status;
+	@Column(name = "status", nullable=false)
+	private char status;
 	
-	@Column(name = "ROLE", nullable=false)
+	@Column(name = "role", nullable=false)
 	@Enumerated(EnumType.STRING)
 	private Role role;
 

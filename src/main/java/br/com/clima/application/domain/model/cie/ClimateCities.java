@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="TB_CITIES")
+@Table(name="tb_cities")
 @Data
 @ToString
 @RequiredArgsConstructor
@@ -18,30 +18,30 @@ public class ClimateCities {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "NAME", nullable=false)
+    @Column(name = "name", nullable=false)
     private String name;
 
-    @Column(name = "STATE", nullable=false)
+    @Column(name = "state", nullable=false)
     private String state;
 
-    @Column(name = "COUNTRY", nullable=false)
+    @Column(name = "country", nullable=false)
     private String contry;
 
-    @Column(name = "DATE", nullable=false)
+    @Column(name = "date", nullable=false)
     private String date;
 
-    @Column(name = "TEMP_MIN")
+    @Column(name = "temp_min")
     private Double tempmin;
 
-    @Column(name = "TEMP_MAX")
+    @Column(name = "temp_max")
     private Double tempmax;
 
-    @Column(name = "WIND_SPEED")
+    @Column(name = "wind_speed")
     private Double windSpeed;
 
-    @Column(name = "WIND_DEG")
+    @Column(name = "wind_deg")
     private Double winddeg;
 
-    @Column(name = "WIND_GUST")
+    @Column(name = "wind_gust")
     private Double windgust;
 }

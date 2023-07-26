@@ -1,6 +1,7 @@
 package br.com.clima.application.service.openweather;
 
 import br.com.clima.application.domain.model.cie.ClimateCities;
+import br.com.clima.application.exceptions.CustomErrorDecoder;
 import br.com.clima.application.service.ClimateCitiesService;
 import br.com.clima.client.APIOpenWeather;
 import br.com.clima.client.response.OWGeoResponse;
@@ -35,6 +36,7 @@ public class OpenWeatherService {
         return Feign.builder()
                 .encoder(new GsonEncoder())
                 .decoder(new GsonDecoder())
+                .errorDecoder(new CustomErrorDecoder())
                 .requestInterceptor(template -> {
                     template.query("lat", String.valueOf(lat));
                     template.query("lon", String.valueOf(lon));
@@ -43,10 +45,11 @@ public class OpenWeatherService {
                 .target(APIOpenWeather.class, endpoint);
     }
 
-    private OWGeoResponse getGeolocationClient(String city, String uf){
+    private OWGeoResponse getGeolocationClient(String city, String uf) throws Exception{
         APIOpenWeather client = Feign.builder()
                                     .encoder(new GsonEncoder())
                                     .decoder(new GsonDecoder())
+                                    .errorDecoder(new CustomErrorDecoder())
                                     .requestInterceptor(template -> {
                                         template.query("city", city);
                                         template.query("uf", uf);
@@ -64,7 +67,7 @@ public class OpenWeatherService {
         log.info(json);
     }
 
-    public void climateRegister(String city, String uf){
+    public void climateRegister(String city, String uf) throws Exception {
 
         OWGeoResponse geolocation = getGeolocationClient(city, uf);
 
