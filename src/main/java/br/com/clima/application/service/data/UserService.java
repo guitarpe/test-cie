@@ -18,7 +18,7 @@ import java.util.Objects;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UserService {
 
-    IUsersRepository usersRepository;
+    private final IUsersRepository usersRepository;
 
     public DataResponse getAllUsers() throws Exception{
         try{

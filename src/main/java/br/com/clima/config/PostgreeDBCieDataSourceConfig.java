@@ -46,7 +46,7 @@ public class PostgreeDBCieDataSourceConfig {
             EntityManagerFactoryBuilder cieDbEntityManagerFactoryBuilder, @Qualifier("cieDbDataSource") DataSource cieDbDataSource) {
 
         Map<String, String> cieDbJpaProperties = new HashMap<>();
-        cieDbJpaProperties.put("hibernate.dialect", "org.hibernate.dialect.SQLServer2012Dialect");
+        cieDbJpaProperties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQL10Dialect");
 
         return cieDbEntityManagerFactoryBuilder
                 .dataSource(cieDbDataSource)

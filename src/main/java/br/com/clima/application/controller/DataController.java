@@ -25,8 +25,8 @@ import java.util.Date;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class DataController {
 
-    ClimateCitiesService climateCitiesService;
-    UserService userService;
+    private final ClimateCitiesService climateCitiesService;
+    private final UserService userService;
 
     @PostMapping(value="/cities",
             produces = MediaType.APPLICATION_JSON_VALUE,
@@ -39,6 +39,8 @@ public class DataController {
                 new Date(request.getDataInicio()),
                 new Date(request.getDataFinal())
         );
+
+        log.info(response.toString());
 
         if(!response.isStatus()) {
             throw new EntityNotFoundException(response.getMensagem());

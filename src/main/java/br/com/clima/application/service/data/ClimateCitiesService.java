@@ -17,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ClimateCitiesService {
 
-    IClimateCitiesRepository repository;
+    private final IClimateCitiesRepository repository;
 
     public DataResponse getCitiesInterval(String name, String uf, Date dtIni, Date dtFim) throws Exception{
         try{

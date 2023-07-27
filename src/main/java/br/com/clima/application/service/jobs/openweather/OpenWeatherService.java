@@ -34,7 +34,7 @@ public class OpenWeatherService {
     @Value("${openweathermap.endpoint-geo}")
     public String endpointgeo;
 
-    ClimateCitiesService service;
+    private final ClimateCitiesService service;
 
     private final APIOpenWeather client;
 
@@ -79,6 +79,6 @@ public class OpenWeatherService {
 
         service.saveTemperatureCity(climate);
 
-        printLog(response);
+        printLog(climate);
     }
 }

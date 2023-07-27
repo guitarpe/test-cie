@@ -9,7 +9,8 @@ import java.util.Objects;
 
 @Entity
 @Table(name="tb_users")
-@Data
+@Getter
+@Setter
 @ToString
 @RequiredArgsConstructor
 @Builder
@@ -19,7 +20,8 @@ public class Users implements Serializable {
 	public enum Role {USER, ADMIN}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tb_users_id_seq")
+	@SequenceGenerator(name = "tb_users_id_seq", sequenceName = "tb_users_id_seq", allocationSize = 1)
 	private Long id;
 	
 	@Column(name = "login", nullable=false)

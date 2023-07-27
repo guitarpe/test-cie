@@ -1,12 +1,15 @@
 package br.com.clima.application.domain.model.cie;
 
 import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name="tb_cities")
-@Data
+@Getter
+@Setter
 @ToString
 @RequiredArgsConstructor
 @Builder
@@ -14,8 +17,9 @@ import javax.persistence.*;
 public class ClimateCities {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tb_cities_id_seq")
+    @SequenceGenerator(name = "tb_cities_id_seq", sequenceName = "tb_cities_id_seq", allocationSize = 1)
+    private Long id;
 
     @Column(name = "name", nullable=false)
     private String name;
@@ -43,4 +47,17 @@ public class ClimateCities {
 
     @Column(name = "wind_gust")
     private Double windgust;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        ClimateCities that = (ClimateCities) o;
+        return id != null && Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

@@ -21,7 +21,7 @@ spring:
           use_jdbc_metadata_defaults: false
     show-sql: false
     open-in-view: false
-    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
   datasource-ciedb:
     url: jdbc:postgresql://34.151.216.181:5432/postgres
     username: postgres

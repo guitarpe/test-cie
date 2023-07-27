@@ -12,11 +12,11 @@ import java.util.List;
 
 @FeignClient(contextId = "openWeatherClient", name = "openWeatherClient", url = "${openweathermap.endpoint}")
 public interface APIOpenWeather {
-    @GetMapping(name="/data/2.5/weather", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping("/data/2.5/weather")
     @Headers({"Content-Type: application/json"})
-    OWResponse getWeatherCity(@RequestParam("lat") Long lat, @RequestParam("lon") Long lon, @RequestParam("token") String token);
+    OWResponse getWeatherCity(@RequestParam("lat") String lat, @RequestParam("lon") String lon, @RequestParam("appid") String token);
 
-    @GetMapping(name="/geo/1.0/direct", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping("/geo/1.0/direct")
     @Headers({"Content-Type: application/json"})
     List<OWGeoResponse> getGeolocationCity(@RequestParam("q") String city, @RequestParam("limit") String limit, @RequestParam("appid") String appid);
 }

@@ -25,6 +25,8 @@ public class CallTasks {
 
             service.start(request.getIntervalo(), request.getCidade(), request.getUf());
 
+            log.info(Messages.MSG_INI_SUCCESS.value());
+
             return DataResponse.builder()
                     .status(true)
                     .mensagem(Messages.MSG_INI_SUCCESS.value())
@@ -54,6 +56,8 @@ public class CallTasks {
             verifyInfoRequest(request);
 
             service.stop();
+
+            log.info(Messages.MSG_FIN_SUCCESS.value());
 
             return DataResponse.builder()
                     .status(true)
