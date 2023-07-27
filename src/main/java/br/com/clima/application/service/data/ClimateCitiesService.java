@@ -22,7 +22,8 @@ public class ClimateCitiesService {
 
     public DataResponse getCitiesInterval(String name, String uf, LocalDate dtIni, LocalDate dtFim) throws Exception{
         try{
-            List<ClimateCities> list = repository.findClimateCitiesByNameAndAndStateAndDateBetween(name, uf, dtIni, dtFim);
+            List<ClimateCities> list = repository.findClimateCitiesByNameAndAndStateAndDateBetween(
+                    name, uf, dtIni, dtFim);
 
             return DataResponse.builder()
                     .status(true)

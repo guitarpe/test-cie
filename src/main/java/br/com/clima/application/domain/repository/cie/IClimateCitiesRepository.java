@@ -11,5 +11,6 @@ import java.util.List;
 @Repository
 public interface IClimateCitiesRepository extends JpaRepository<ClimateCities, Long> {
 
-    List<ClimateCities> findClimateCitiesByNameAndAndStateAndDateBetween(String name, String uf, LocalDate dtIni, LocalDate dtFim);
+    List<ClimateCities> findClimateCitiesByNameAndAndStateAndDateBetween(
+            String name, String uf, LocalDate dtIni, LocalDate dtFim);
 }
