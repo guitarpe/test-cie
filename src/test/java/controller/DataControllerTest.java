@@ -20,6 +20,8 @@ import org.springframework.http.ResponseEntity;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -47,11 +49,17 @@ public class DataControllerTest {
         cities.setDataInicio("2023-07-21");
         cities.setDataFinal("2023-07-26");
 
+        String format = "yyyy-MM-dd";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+
+        LocalDate dataIni = LocalDate.parse(cities.getDataInicio(), formatter);
+        LocalDate dataFin = LocalDate.parse(cities.getDataFinal(), formatter);
+
         ClimateCities climateCities = ClimateCities.builder()
                                     .name("Maceió")
                                     .state("AL")
                                     .contry("BR")
-                                    .date("2023-07-07")
+                                    .date(dataIni)
                                     .tempmin(0.0)
                                     .tempmax(0.0)
                                     .windSpeed(0.0)
@@ -67,13 +75,13 @@ public class DataControllerTest {
 
         when(climateCitiesService.getCitiesInterval(
                 cities.getCidade(), cities.getUf(),
-                new Date(cities.getDataInicio()), new Date(cities.getDataFinal())))
+                dataIni, dataFin))
                 .thenReturn(response);
 
         ResponseEntity<JobResponse> result = controller.getInfoCities(cities);
         verify(climateCitiesService, times(1)).getCitiesInterval(
                 cities.getCidade(), cities.getUf(),
-                new Date(cities.getDataInicio()), new Date(cities.getDataFinal()));
+                dataIni, dataFin);
         assertEquals(climateCities, Objects.requireNonNull(result.getBody()).getData());
     }
 
