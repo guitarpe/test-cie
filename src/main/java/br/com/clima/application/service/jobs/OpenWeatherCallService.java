@@ -20,21 +20,21 @@ public class OpenWeatherCallService {
 
     public void start(long interval, String city, String uf) {
         timer = new Timer();
-        timer.schedule(Task.builder()
-                .city(city)
-                .uf(uf).build(), 0, interval);
+        timer.schedule(new Task(city, uf), 0, interval);
     }
 
     public void stop() {
         timer.cancel();
     }
 
-    @Getter
-    @Setter
-    @Builder
     private class Task extends TimerTask {
         private String city;
         private String uf;
+
+        public Task(String city, String uf) {
+            this.city = city;
+            this.uf = uf;
+        }
 
         @SneakyThrows
         @Override
