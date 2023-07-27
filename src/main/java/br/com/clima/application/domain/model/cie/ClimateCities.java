@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -31,7 +32,7 @@ public class ClimateCities {
     private String contry;
 
     @Column(name = "date", nullable=false)
-    private String date;
+    private LocalDate date;
 
     @Column(name = "temp_min")
     private Double tempmin;

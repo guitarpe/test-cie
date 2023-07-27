@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class ClimateCitiesService {
 
     private final IClimateCitiesRepository repository;
 
-    public DataResponse getCitiesInterval(String name, String uf, Date dtIni, Date dtFim) throws Exception{
+    public DataResponse getCitiesInterval(String name, String uf, LocalDate dtIni, LocalDate dtFim) throws Exception{
         try{
             List<ClimateCities> list = repository.findClimateCitiesByNameAndAndStateAndDateBetween(name, uf, dtIni, dtFim);
 

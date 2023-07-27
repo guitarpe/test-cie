@@ -4,10 +4,11 @@ CREATE TABLE tb_cities
     name        VARCHAR(255)                            NOT NULL,
     state       VARCHAR(255)                            NOT NULL,
     country     VARCHAR(255)                            NOT NULL,
-    date        VARCHAR(255)                            NOT NULL,
-    temperature VARCHAR(255)                            NOT NULL,
-    wind_speed  INTEGER                                 NOT NULL,
-    dh_insert   TIMESTAMP WITHOUT TIME ZONE             NOT NULL,
-    dh_update   TIMESTAMP WITHOUT TIME ZONE             NOT NULL,
+    date        DATE                                    NOT NULL,
+    temp_min    double precision                        NOT NULL,
+    temp_max    double precision                        NOT NULL,
+    wind_speed  double precision                        NOT NULL,
+    wind_deg    double precision                        NOT NULL,
+    wind_gust   double precision                        NOT NULL
     CONSTRAINT pk_tb_cities PRIMARY KEY (id)
 );

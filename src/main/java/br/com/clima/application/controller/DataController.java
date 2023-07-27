@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Slf4j
@@ -33,11 +35,17 @@ public class DataController {
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<JobResponse> getInfoCities(@Valid @RequestBody CitiesDTO request) throws Exception {
 
+        String format = "yyyy-MM-dd";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+
+        LocalDate dataIni = LocalDate.parse(request.getDataInicio(), formatter);
+        LocalDate dataFin = LocalDate.parse(request.getDataFinal(), formatter);
+
         DataResponse response = climateCitiesService.getCitiesInterval(
                 request.getCidade(),
                 request.getUf(),
-                new Date(request.getDataInicio()),
-                new Date(request.getDataFinal())
+                dataIni,
+                dataFin
         );
 
         log.info(response.toString());
