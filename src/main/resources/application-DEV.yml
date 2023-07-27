@@ -63,5 +63,6 @@ security:
 #api weather
 openweathermap:
   token: 18100d202b069adfa0fcba767e0caf16
-  endpoint: https://api.openweathermap.org/data/2.5
-  endpoint-geo: http://api.openweathermap.org/geo/1.0
+  endpoint: https://api.openweathermap.org/
+  #endpoint: https://api.openweathermap.org/data/2.5
+  #endpoint-geo: http://api.openweathermap.org/geo/1.0

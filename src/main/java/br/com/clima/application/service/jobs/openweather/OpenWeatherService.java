@@ -31,34 +31,22 @@ public class OpenWeatherService {
     @Value("${openweathermap.endpoint}")
     public String endpoint;
 
+    @Value("${openweathermap.endpoint-geo}")
+    public String endpointgeo;
+
     ClimateCitiesService service;
 
-    private APIOpenWeather getAPIClient(long lat, long lon){
-        return Feign.builder()
-                .encoder(new GsonEncoder())
-                .decoder(new GsonDecoder())
-                .errorDecoder(new CustomErrorDecoder())
-                .requestInterceptor(template -> {
-                    template.query("lat", String.valueOf(lat));
-                    template.query("lon", String.valueOf(lon));
-                    template.query("token", token);
-                })
-                .target(APIOpenWeather.class, endpoint);
-    }
+    private final APIOpenWeather client;
 
     private OWGeoResponse getGeolocationClient(String city, String uf) throws Exception{
-        APIOpenWeather client = Feign.builder()
-                                    .encoder(new GsonEncoder())
-                                    .decoder(new GsonDecoder())
-                                    .errorDecoder(new CustomErrorDecoder())
-                                    .requestInterceptor(template -> {
-                                        template.query("city", city);
-                                        template.query("uf", uf);
-                                        template.query("token", token);
-                                    })
-                                    .target(APIOpenWeather.class, endpoint);
+        try {
+            String cityParams = Utils.removeAccentuation(city) + "," + uf + ",55";
+            String limit = "1";
 
-        return client.getGeolocationCity();
+            return client.getGeolocationCity(cityParams, limit, token).get(0);
+        }catch (Exception ex){
+            throw new Exception(ex.getMessage());
+        }
     }
 
     private void printLog(Object obj) {
@@ -70,10 +58,8 @@ public class OpenWeatherService {
 
     public void climateRegister(String city, String uf) throws Exception {
 
-        OWGeoResponse geolocation = getGeolocationClient(Utils.removeAccentuation(city), uf);
-
-        APIOpenWeather client = getAPIClient(geolocation.lat, geolocation.lon);
-        OWResponse response = client.getWheatherCity();
+        OWGeoResponse geolocation = getGeolocationClient(city, uf);
+        OWResponse response = client.getWeatherCity(geolocation.lat, geolocation.lon, token);
 
         String format = "yyyy-MM-dd";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
